@@ -18,7 +18,7 @@ public class Target : MonoBehaviour
     {
         if ((Vector2)boxPos == (Vector2)transform.position)
         {
-            Debug.Log("yes sir!");
+            GameController.OnUpdateTargetCount(1);
         }
     }
 }
