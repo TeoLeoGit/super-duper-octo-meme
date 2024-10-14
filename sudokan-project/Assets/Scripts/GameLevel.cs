@@ -4,15 +4,5 @@ using UnityEngine;
 
 public class GameLevel : MonoBehaviour
 {
-    private int[][] grid;
-
-    public void GenGrid()
-    {
-
-    }
-
-    public void UpdateGride()
-    {
-
-    }    
+    public int cellSize = 8;
 }
