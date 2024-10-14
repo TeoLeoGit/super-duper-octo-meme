@@ -46,7 +46,6 @@ public class Player : MonoBehaviour
         {
             if (ray.collider.gameObject.TryGetComponent<Box>(out Box box)) 
             {
-                Debug.Log(ray.collider.gameObject);
                 if (box.CanMove(_targetPosition - transform.position))
                 {
                     _isMoving = true;
