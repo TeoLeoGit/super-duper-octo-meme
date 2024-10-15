@@ -9,15 +9,22 @@ public class SoundManager : MonoBehaviour
     [SerializeField] AudioClip _clipWin;
 
     [SerializeField] GameObject _audioSource;
+    GameObject _bgSource = null;
 
     private void Awake()
     {
-        PlaySound(SoundType.Background);
+        GameController.onPlayAudio += PlaySound;
+        GameController.onStopAudio += StopSound;
     }
 
+    private void OnDestroy()
+    {
+        GameController.onPlayAudio -= PlaySound;
+        GameController.onStopAudio -= StopSound;
+    }
     private void PlaySound(SoundType type)
     {
-        var audioSource = Instantiate(_audioSource).GetComponent<AudioSource>();
+        var audioSource = Instantiate(_audioSource, transform).GetComponent<AudioSource>();
 
         switch(type)
         {
@@ -28,12 +35,31 @@ public class SoundManager : MonoBehaviour
                 audioSource.clip = _clipWin;
                 break;
             case SoundType.Background:
+                if (_bgSource != null) 
+                {
+                    Destroy(audioSource.gameObject);
+                    return;
+                }
+                _bgSource = audioSource.gameObject;
                 audioSource.loop = true;
-                audioSource.clip = _clipWin;
+                audioSource.clip = _clipBackground;
                 break;
         }
         audioSource.Play();
+    }
 
+    private void StopSound(SoundType type)
+    {
+        switch (type)
+        {
+            case SoundType.Background:
+                Destroy(_bgSource);
+                break;
+            case SoundType.All:
+                for (int i = transform.childCount - 1; i > 0; i--)
+                    Destroy(transform.GetChild(i).gameObject);
+                break;
+        }
     }
 }
 
@@ -42,4 +68,5 @@ public enum SoundType
     Walking = 1,
     Background = 2,
     Win = 3,
+    All = 99,
 }

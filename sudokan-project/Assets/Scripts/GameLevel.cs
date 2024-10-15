@@ -24,7 +24,8 @@ public class GameLevel : MonoBehaviour
         if (targetCount == currentFinTarget)
         {
             //Call end game.
-            Debug.Log("Fin!");
+            GameController.OnStopAudio(SoundType.All);
+            GameController.OnPlayAudio(SoundType.Win);
         }
     }
 }

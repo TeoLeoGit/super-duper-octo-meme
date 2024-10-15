@@ -12,5 +12,8 @@ public class IngameManager : MonoBehaviour
             Destroy(transform.GetChild(i).gameObject);
         }
         Instantiate(_prefabLevel, transform);
+        GameController.OnStopAudio(SoundType.All);
+        GameController.OnPlayAudio(SoundType.Background);
+
     }
 }

@@ -53,6 +53,7 @@ public class Player : MonoBehaviour
                     {
                         _isMoving = false;
                     });
+                    GameController.OnPlayAudio(SoundType.Walking);
                 }
             }
         } 
