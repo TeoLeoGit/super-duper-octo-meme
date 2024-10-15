@@ -9,6 +9,7 @@ public class GameController
     public static event Action<int> onUpdateTargetCount;
     public static event Action<SoundType> onPlayAudio;
     public static event Action<SoundType> onStopAudio;
+    public static event Action onLevelComplete;
 
     public static void OnBoxMovement(Vector3 playerPosition)
     {
@@ -28,5 +29,10 @@ public class GameController
     public static void OnStopAudio(SoundType type)
     {
         onStopAudio?.Invoke(type);
+    }
+
+    public static void OnLevelComplete()
+    {
+        onLevelComplete?.Invoke();
     }
 }

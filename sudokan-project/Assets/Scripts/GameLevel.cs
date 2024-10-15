@@ -26,6 +26,7 @@ public class GameLevel : MonoBehaviour
             //Call end game.
             GameController.OnStopAudio(SoundType.All);
             GameController.OnPlayAudio(SoundType.Win);
+            GameController.OnLevelComplete();
         }
     }
 }
